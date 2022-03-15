@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import "../../public/styles.css";
 import ToDoItem from "./ToDoItem";
+import InputArea from "./InputArea";
 function App() {
-  const [item, setItem] = useState("");
   const [itemsArray, setItemsArray] = useState([]);
-  function handleChange(event) {
-    setItem(event.target.value);
-  }
-  function handleSubmit() {
+
+  function handleSubmit(item) {
     setItemsArray((prevItems) => {
       return [...prevItems, item];
     });
-    setItem("");
   }
   function handleTrashClick(id) {
     console.log("check delete");
@@ -27,12 +24,7 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <div className="form">
-        <input value={item} onChange={handleChange} type="text" />
-        <button type="submit" onClick={handleSubmit}>
-          <span>Add</span>
-        </button>
-      </div>
+      <InputArea onAdd={handleSubmit} />
       <div>
         <ul>
           {itemsArray.map((item, index) => (
