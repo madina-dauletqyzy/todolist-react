@@ -13,6 +13,14 @@ function App() {
     });
     setItem("");
   }
+  function handleTrashClick(id) {
+    console.log("check delete");
+    setItemsArray((prevItems) => {
+      return prevItems.filter((item, index) => {
+        return index !== id;
+      });
+    });
+  }
 
   return (
     <div className="container">
@@ -27,8 +35,13 @@ function App() {
       </div>
       <div>
         <ul>
-          {itemsArray.map((item) => (
-            <ToDoItem itemName={item} />
+          {itemsArray.map((item, index) => (
+            <ToDoItem
+              itemName={item}
+              onChecked={handleTrashClick}
+              key={index}
+              id={index}
+            />
           ))}
         </ul>
       </div>

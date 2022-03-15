@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 function ToDoItem(props) {
   const [isDone, setIsDone] = useState(false);
   function handleClick() {
@@ -6,11 +7,18 @@ function ToDoItem(props) {
       return !prevValue;
     });
   }
+
   return (
-    <div onClick={handleClick}>
+    <div className="listdiv" onClick={handleClick}>
       <li style={{ textDecoration: isDone ? "line-through" : "none" }}>
         {props.itemName}
       </li>
+      <i
+        className="fa-solid fa-trash"
+        onClick={() => {
+          props.onChecked(props.id);
+        }}
+      ></i>
     </div>
   );
 }
